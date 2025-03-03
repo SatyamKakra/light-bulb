@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #222;
+}
+
+@keyframes glow-pulse {
+    0% { box-shadow: 0 0 20px rgba(255, 255, 0, 0.4); }
+    50% { box-shadow: 0 0 50px rgba(255, 255, 0, 0.8); }
+    100% { box-shadow: 0 0 20px rgba(255, 255, 0, 0.4); }
+}
+
+body.on {
+    background: radial-gradient(#e3d004, #fff); /* Yellow background */
+}
+
+.bulb {
+    position: relative;
+    width: 100px; /* Adjusted width */
+    height: 100px; /* Adjusted height */
+    background: #444;
+    border-radius: 50%;
+    z-index: 2;
+    top: 20px; /* Adjusted position for space from the top */
+}
+
+
+body.on .bulb {
+    animation: flicker 0.8s ease-in-out, sway 2s infinite ease-in-out alternate;
+    background-color: #ffea00; /* Bright yellow bulb color */
+    box-shadow: 0 0 50px #ffea00, 
+                0 0 100px #e3d004, /* Darker yellow for deeper glow effect */
+                0 0 150px #d8c815, 
+                0 0 200px #e1d233, 
+                0 0 250px #f5cc1b, /* More intense yellow */
+                0 0 300px #ffea00, 
+                0 0 350px #e3d004; /* Glowing yellow effect */
+}
+
+.bulb::before {
+    content: '';
+    left: 25px;  /* Adjusted to match new bulb size */
+    top: -50px;  /* Adjusted to match new bulb size */
+    border-top: 30px solid #000;
+    border-radius: 10px;
+    position: absolute;
+    width: 50px;   /* Adjusted width for the bulb base */
+    height: 100px; /* Adjusted height for the bulb base */
+    background: #444;
+}
+
+body.on .bulb::before {
+    background: #ffea00; /* Yellow color for the bulb's base */
+}
+
+body.on .bulb::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: glow-pulse 1.5s infinite alternate ease-in-out;
+    transform: translate(-50%, -50%);
+    width: 150px; /* Increased the glow size */
+    background: #ffea00; /* Bright yellow glow effect */
+    border-radius: 50%;
+    filter: blur(50px); /* Adjusted blur for stronger glow */
+}
+
+.bulb span:nth-child(1) {
+    position: absolute;
+    top:-1px;  /* Adjusted to match new bulb size */
+    left: 30px;  /* Adjusted to match new bulb size */
+    display: block;
+    width: 40px; /* Increased size */
+    height: 40px; /* Increased size */
+    background: transparent;
+    transform: rotate(405deg);
+    box-shadow: 30px 30px 0 15px #444;
+    border-bottom-right-radius: 50px;
+}
+
+body.on .bulb span:nth-child(1) {
+    box-shadow: 30px 30px 0 15px #ffea00; /* Bright yellow shadow */
+}
+
+.bulb span:nth-child(2) {
+    position: absolute;
+    top: 20px;  /* Adjusted to match new bulb size */
+    right: -5px; /* Adjusted to match new bulb size */
+    display: block;
+    width: 30px; /* Increased size */
+    height: 30px; /* Increased size */
+    background: transparent;
+    transform: rotate(120deg);
+    box-shadow: -30px 30px 0 15px #979090;
+    border-bottom-left-radius: 50px;
+}
+
+body.on .bulb span:nth-child(2) {
+    box-shadow: -30px 30px 0 15px #ffea00; /* Bright yellow shadow */
+}
+
+.wire {
+    position: absolute;
+    left: calc(50% - 2px);
+    bottom: 50%;
+    width: 4px;
+    height: 60vh;
+    background-color: #000;
+    z-index: 1;
+}
+
+.switch {
+    position: absolute;
+    bottom: 50px;
+    box-shadow: 1px 1px 2px rgb(180, 176, 176);
+    right: 100px;
+    border: 1px solid rgb(161, 157, 157);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#eee, #ccc, #eee);
+    border-radius: 10px;
+}
+
+.switch .btn {
+    position: absolute;
+    box-shadow: 3px 1px 2px rgb(180, 176, 176);
+    width: 25px;
+    height: 40px;
+    background: linear-gradient(#777, #fff, #777);
+    border-radius: 6px;
+    border: 2px solid gray;
+    cursor: pointer;
+}
+
+.switch .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    border-radius: 4px;
+    background: linear-gradient(#fff, #fff);
+}
+
+.on .switch .btn::before {
+    top: 15%;
+}
+
+#audio {
+    display: none;
+}
+@keyframes electricity {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 200px; }
+}
+
